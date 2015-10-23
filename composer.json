@@ -1,0 +1,21 @@
+{
+    "name": "skoro/curl",
+    "description": "Object oriented wrapper for curl functions.",
+    "type": "library",
+    "keywords": ["curl"," multi curl"],
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Skorobogatko Alexei",
+            "email": "skorobogatko.oleksii@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "skoro\\curl\\": ""
+        }
+    }
+}
