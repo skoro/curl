@@ -136,11 +136,17 @@ class Curl
     }
     
     /**
-     * Get a request url.
+     * Get a request or redirected url.
+     * @param boolean $src on true returns initial requested url, on false
+     *                     returns redirected url if redirect happen.
+     * @see Curl::isRedirected()
      * @return string|null
      */
-    public function getUrl()
+    public function getUrl($src = false)
     {
+        if (!$src && $this->isRedirected()) {
+            return $this->responseInfo['url'];
+        }
         return isset($this->options[CURLOPT_URL]) ? $this->options[CURLOPT_URL] : null;
     }
 
@@ -412,11 +418,18 @@ class Curl
     public function getResponseHeaders($header = null)
     {
         if (empty($this->options[CURLOPT_HEADER])) {
-            throw new \RuntimeException('Cannot get response headers while option CURLINFO_HEADER_OUT is not set.');
+            throw new \RuntimeException('Cannot get response headers while option CURLOPT_HEADER is not set.');
         }
         
         if (empty($this->responseHeaders)) {
             $buf = substr($this->response, 0, $this->responseInfo['header_size']);
+            $buf = trim($buf);
+            // On redirected location we have all headers for all redirected
+            // locations. 
+            if ($this->isRedirected()) {
+                $buf = explode("\r\n\r\n", $buf);
+                $buf = array_pop($buf);
+            }
             $lines = array_filter(explode("\r\n", $buf));
             // Skip HTTP/1.X line.
             array_shift($lines);
@@ -430,6 +443,16 @@ class Curl
             return isset($this->responseHeaders[$header]) ? $this->responseHeaders[$header] : '';
         }
         return $this->responseHeaders;
+    }
+    
+    /**
+     * Check whether requested url was redirected or not.
+     * @return integer count of redirects.
+     */
+    public function isRedirected()
+    {
+        return isset($this->responseInfo['redirect_count']) ?
+            $this->responseInfo['redirect_count'] : 0;
     }
     
 }
