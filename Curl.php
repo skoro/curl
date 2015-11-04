@@ -358,7 +358,12 @@ class Curl
     public function getResponse()
     {
         if (!empty($this->options[CURLOPT_HEADER]) && $this->getMethod() !== 'HEAD') {
-            return substr($this->response, $this->responseInfo['header_size']);
+            $response = substr($this->response, $this->responseInfo['header_size']);
+            if ($this->getResponseHeaders('Content-Encoding') === 'gzip') {
+                $response = gzdecode($response);
+                unset($this->responseHeaders['Content-Encoding']);
+            }
+            return $response;
         }
         return $this->response;
     }
