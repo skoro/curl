@@ -282,8 +282,13 @@ class Curl
         if ($method !== null) {
             $this->setMethod($method);
         }
-        $this->options = $options + $this->options;
-
+        
+        // Manual merge options. Fix bug when CURLOPT_RETURNTRANSFER must be
+        // before CURLOPT_FILE.
+        foreach ($options as $id => $val) {
+            $this->options[$id] = $val;
+        }
+        
         if ($method === 'HEAD') {
             $this->options[CURLOPT_NOBODY] = true;
             $this->options[CURLOPT_HEADER] = true;
