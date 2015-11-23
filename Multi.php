@@ -27,7 +27,7 @@ namespace skoro\curl;
  * ```
  * @author skoro
  */
-class Multi
+class Multi implements \IteratorAggregate
 {
     /**
      * @var resource
@@ -135,6 +135,16 @@ class Multi
         }
         
         return $this;
+    }
+    
+    /**
+     * Allow to traverse among connected curl instances.
+     *
+     * @return \Traversable
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->multi);
     }
     
 }
