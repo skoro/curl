@@ -316,7 +316,7 @@ class Curl
     protected function doRequest()
     {
         if (($this->response = curl_exec($this->handler)) === false) {
-            throw new \RuntimeException('Curl request failed: ' . curl_error($this->handler), curl_errno($this->handler));
+            throw new \RuntimeException(curl_error($this->handler), curl_errno($this->handler));
         }
         $this->responseInfo = curl_getinfo($this->handler);
         $this->status = $this->responseInfo['http_code'];
