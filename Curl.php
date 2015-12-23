@@ -421,7 +421,7 @@ class Curl
     
     /**
      * Extract http headers from the response.
-     * @param string $header Optional. Case-sensitive header name. 
+     * @param string $header Optional. Case-insensitive header name. 
      * @return string|array Returns header value or list of headers in form key => value.
      * @throws \RuntimeException
      * @see Curl::withHeaders()
@@ -446,11 +446,12 @@ class Curl
             array_shift($lines);
             foreach ($lines as $line) {
                 list ($h, $v) = explode(': ', $line, 2);
-                $this->responseHeaders[$h] = $v;
+                $this->responseHeaders[strtolower($h)] = $v;
             }
         }
         
         if ($header !== null) {
+            $header = strtolower($header);
             return isset($this->responseHeaders[$header]) ? $this->responseHeaders[$header] : '';
         }
         return $this->responseHeaders;
