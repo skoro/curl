@@ -194,6 +194,17 @@ class Curl
     }
     
     /**
+     * Set user agent string to request.
+     * @param string $agent user agent string, see UA_* constants.
+     * @return Curl
+     */
+    public function setUserAgent($agent)
+    {
+        $this->options[CURLOPT_USERAGENT] = $agent;
+        return $this;
+    }
+    
+    /**
      * Add http header to request.
      * @param string $header
      * @param string $value
