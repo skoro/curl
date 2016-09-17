@@ -337,7 +337,7 @@ class Curl
     /**
      * Reads a request status.
      * @return string Returns input buffer.
-     * @throws \yii\web\HttpException
+     * @throws \skoro\curl\HttpException
      */
     protected function completeRequest()
     {
