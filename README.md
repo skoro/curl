@@ -31,6 +31,8 @@ Once the extension is installed, simply use it in your code by  :
 // Include composer autoload script.
 require 'vendor/autoload.php';
 
+use skoro\curl\Curl;
+
 // Simple GET request.
 $content = Curl::get('google.com');
 
@@ -44,6 +46,11 @@ $body = $curl->request(); // Returns response with headers.
 
 Curl multi usage:
 ```php
+require 'vendor/autoload.php';
+
+use skoro\curl\Multi;
+use skoro\curl\Curl;
+
 $m = new Multi();
 // Attach curl instances and run them.
 $m->add(new Curl('google.com', 'HEAD'))
@@ -62,6 +69,6 @@ Exceptions
 
 Links
 -----
-* [https://github.com/skoro/curl]()
-* [http://docs.php.net/manual/en/book.curl.php]()
-* [http://getcomposer.org]()
+* [https://github.com/skoro/curl](https://github.com/skoro/curl)
+* [http://docs.php.net/manual/en/book.curl.php](http://docs.php.net/manual/en/book.curl.php)
+* [http://getcomposer.org](http://getcomposer.org)
