@@ -247,7 +247,7 @@ class Curl
      */
     public static function get($url, $options = [])
     {
-        $curl = new self($url, 'GET', $options);
+        $curl = new static($url, 'GET', $options);
         return $curl->request();
     }
     
@@ -260,7 +260,7 @@ class Curl
      */
     public static function post($url, $data, $options = [])
     {
-        $curl = new self($url, 'POST', [
+        $curl = new static($url, 'POST', [
             CURLOPT_POSTFIELDS => http_build_query($data),
         ]);
         return $curl->request('POST', $options);
