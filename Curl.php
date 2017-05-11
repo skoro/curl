@@ -300,7 +300,7 @@ class Curl
             $this->options[$id] = $val;
         }
         
-        if ($method === 'HEAD') {
+        if ($this->getMethod() === 'HEAD') {
             $this->options[CURLOPT_NOBODY] = true;
             $this->options[CURLOPT_HEADER] = true;
         }
