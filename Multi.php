@@ -80,7 +80,7 @@ class Multi implements \IteratorAggregate
      */
     public function remove(Curl $curl)
     {
-        $handle = $curl->getHandle();
+        $handle = $curl->getHandler();
         foreach ($this->multi as $i => $item) {
             if ($handle === $item->getHandler()) {
                 curl_multi_remove_handle($this->handler, $item->getHandler());
