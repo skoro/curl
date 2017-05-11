@@ -84,7 +84,7 @@ class Multi implements \IteratorAggregate
         foreach ($this->multi as $i => $item) {
             if ($handle === $item->getHandler()) {
                 curl_multi_remove_handle($this->handler, $item->getHandler());
-                unset($item[$i]);
+                unset($this->multi[$i]);
                 return true;
             }
         }
