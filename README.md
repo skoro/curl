@@ -51,15 +51,15 @@ require 'vendor/autoload.php';
 use skoro\curl\Multi;
 use skoro\curl\Curl;
 
-$m = new Multi();
+$multi = new Multi();
 // Attach curl instances and run them.
-$m->add(new Curl('google.com', 'HEAD'))
-  ->add(new Curl('microsoft.com', 'HEAD'))
-  ->add(new Curl('amazon.com', 'GET'))
-  ->run();
+$multi->add(new Curl('google.com', 'HEAD'))
+      ->add(new Curl('microsoft.com', 'HEAD'))
+      ->add(new Curl('amazon.com'))
+      ->run();
 // Get responses.
-foreach ($m->getMulti() as $curl) {
-    var_dump($m->getResponse());
+foreach ($multi as $curl) {
+    var_dump($curl->getResponse());
 }
 ```
 
