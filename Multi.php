@@ -90,6 +90,19 @@ class Multi implements \IteratorAggregate
         }
         return false;
     }
+
+    /**
+     * Clears multi load list.
+     *
+     * @since 0.2.3
+     */
+    public function removeAll()
+    {
+        foreach ($this->multi as $curl) {
+            curl_multi_remove_handle($this->handler, $curl->getHandler());
+        }
+        $this->multi = [];
+    }
     
     /**
      * Get multi processing list.
@@ -145,6 +158,5 @@ class Multi implements \IteratorAggregate
     {
         return new \ArrayIterator($this->multi);
     }
-    
 }
 
