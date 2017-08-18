@@ -2,7 +2,7 @@
     "name": "skoro/curl",
     "description": "Object oriented wrapper for curl functions.",
     "type": "library",
-    "keywords": ["curl"," multi curl"],
+    "keywords": ["curl"," multi curl", "http client"],
     "license": "GPL-3.0+",
     "authors": [
         {
