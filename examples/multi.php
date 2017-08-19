@@ -10,6 +10,7 @@ $multi = new Multi();
 $multi->add(new Curl('http://ru.wikipedia.org'))
       ->add(new Curl('http://uk.wikipedia.org'))
       ->add(new Curl('http://google.com'))
+      ->addUrl('https://ru.wikipedia.org')
       ->run();
       
 foreach ($multi as $curl) {

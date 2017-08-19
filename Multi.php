@@ -74,6 +74,21 @@ class Multi implements \IteratorAggregate
     }
     
     /**
+     * Adds url for multiprocessing.
+     *
+     * @param string $url
+     * @param string $method HTTP request method, 'GET' by default.
+     * @param array $options Curl options.
+     * @return Multi
+     *
+     * @since 0.2.3
+     */
+    public function addUrl($url, $method = 'GET', array $options = [])
+    {
+        return $this->add(new Curl($url, $method, $options));
+    }
+    
+    /**
      * Remove Curl instance from multiple processing.
      * @param Curl $curl
      * @return bool
